@@ -17,7 +17,7 @@ using SAPADDON.USERMODEL._MSS_ASUA;
 using SAPADDON.USERMODEL._MSS_CONF;
 
 namespace SAPADDON.FORM
-{
+{ 
     public class BaseApplication
     {
         public BaseApplication() { }
