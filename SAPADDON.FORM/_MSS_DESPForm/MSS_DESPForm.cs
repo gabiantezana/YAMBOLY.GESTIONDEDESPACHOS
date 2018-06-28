@@ -44,7 +44,6 @@ namespace SAPADDON.FORM._MSS_DESPForm
 
         #region Handle Events
 
-
         public bool HandleItemEvents(SAPbouiCOM.ItemEvent itemEvent)
         {
             _Form = GetApplication().Forms.GetForm(itemEvent.FormTypeEx, itemEvent.FormTypeCount);
@@ -159,8 +158,12 @@ namespace SAPADDON.FORM._MSS_DESPForm
             _Form = GetActiveForm();
 
             if (GetForm().Mode == BoFormMode.fm_FIND_MODE)
+            {
+                ChangeStateITems(true);
                 return true;
+            }
 
+            ChangeStateITems(false);
             if (menuEvent.MenuUID == MenuUID.RemoveLine.IdToString() && !menuEvent.BeforeAction)
             {
                 GetMatrix().FlushToDataSource();
@@ -176,6 +179,25 @@ namespace SAPADDON.FORM._MSS_DESPForm
         }
 
         #endregion
+
+        public void ChangeStateITems(bool state)
+        {
+            GetForm().Items.Item(FormItemIds.txtNumero.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtPlacaVehiculo.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtMarcaVehiculo.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtCertifOperVehiculo.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtRazonSocialVehiculo.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtCapacidadMinCarga.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtCapacidadMaxCarga.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtCapacidadMinVolumen.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtCapacidadMaxVolumen.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtNumeroMinRepartos.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtNumeroMaxRepartos.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtNombresConductor.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtLicenciaConducirConductor.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtAlmacen.IdToString()).Enabled = state;
+            GetForm().Items.Item(FormItemIds.txtDocEntry.IdToString()).Enabled = state;
+        }
 
         private void DisableItems()
         {
