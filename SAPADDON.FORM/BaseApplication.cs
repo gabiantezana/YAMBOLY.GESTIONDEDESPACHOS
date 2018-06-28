@@ -15,9 +15,12 @@ using System.Threading;
 using SAPADDON.USERMODEL._MSS_ASUU;
 using SAPADDON.USERMODEL._MSS_ASUA;
 using SAPADDON.USERMODEL._MSS_CONF;
+using System.Reflection;
+using System.IO;
+using System.Drawing;
 
 namespace SAPADDON.FORM
-{ 
+{
     public class BaseApplication
     {
         public BaseApplication() { }
@@ -27,7 +30,7 @@ namespace SAPADDON.FORM
             try
             {
                 ConnectApplication();
-                ShowMessage(MessageType.Success, "El Addon se está cargando..."); 
+                ShowMessage(MessageType.Success, "El Addon se está cargando...");
 
                 ShowMessage(MessageType.Success, "Generando la estructura de base de datos...");
                 CreateDataBaseStructure(GetCompany());
@@ -394,6 +397,10 @@ namespace SAPADDON.FORM
                 oCreationPackage.Enabled = true;
                 oCreationPackage.Position = 15;
 
+                //string path = System.IO.Path.GetDirectoryName(System.Windows) + "\\" + uniqueId + ".bmp";
+                //Bitmap btmap = null;
+                //btmap.Save(path);
+                //oMenuItem.Image = GetResource();
                 //Agrega el nuevo menú al listado principal.
                 oMenus.AddEx(oCreationPackage);
             }
@@ -549,6 +556,19 @@ namespace SAPADDON.FORM
         }
 
         #endregion
+
+        private static string GetResource()
+        {
+            Assembly _assembly = Assembly.GetExecutingAssembly();
+            var asf = _assembly.Location;
+            asf = asf + "//iconoPrincipal.bmp";
+            return asf;
+
+            //var name = _assembly.GetManifestResourceNames().ToList().FirstOrDefault();
+
+            //Stream _imageStream = _assembly.GetManifestResourceStream(name);
+            //return new Bitmap(_imageStream);
+        }
     }
 }
 

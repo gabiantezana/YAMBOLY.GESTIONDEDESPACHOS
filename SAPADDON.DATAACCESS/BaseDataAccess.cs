@@ -35,6 +35,7 @@ namespace SAPADDON.DATAACCESS
         {
             String[] args = System.Environment.GetCommandLineArgs();
             String connectionString = String.Empty;
+            
             if (args.Count() > 1)
             {
                 _GuiApi = new SAPbouiCOM.SboGuiApi();
